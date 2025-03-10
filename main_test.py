@@ -26,6 +26,8 @@ print("> Loading course content...")
 # Load markdown documents
 loaders = [
     # introduction
+    UnstructuredMarkdownLoader('./docs/additional-info/conda.md'),
+    #
     UnstructuredMarkdownLoader('./docs/introduction/assembly.md'),
     UnstructuredMarkdownLoader('./docs/introduction/intro-to-linux.md'),
     UnstructuredMarkdownLoader('./docs/introduction/variant-detection.md'),
@@ -81,7 +83,7 @@ from langchain.prompts import PromptTemplate
 
 template = """
 You are a bioinformatics teaching assistant for a pathogen genomics workshop. 
-You have access to lecture notes from 13 distinct lectures. 
+You have access to lecture notes from 12 distinct lectures. 
 Using only the provided context from these lecture notes, concisely answer the student's question below in no more than four sentences.
 If the answer is not clear from the context provided, explicitly say you don't know and recommend the student ask Jody, the course instructor.
 
