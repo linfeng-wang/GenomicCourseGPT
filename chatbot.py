@@ -3,7 +3,6 @@ import os
 import sys
 import datetime
 import openai
-from dotenv import load_dotenv, find_dotenv
 from langchain.document_loaders import UnstructuredMarkdownLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
