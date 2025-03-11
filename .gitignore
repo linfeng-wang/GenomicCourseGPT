@@ -1,4 +1,4 @@
 # .gitignore
 chroma/
-
+.env
 # find . -type f -size +99M
