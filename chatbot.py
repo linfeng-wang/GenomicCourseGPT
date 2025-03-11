@@ -24,7 +24,7 @@ print(f"- Using model: {llm_name}")
 # Load markdown files as documents
 print("> Loading course content...")
 markdown_files = [
-    './docs/additional-info/conda.md'
+    './docs/additional-info/conda.md',
     #
     './docs/introduction/assembly.md',
     './docs/introduction/intro-to-linux.md',
@@ -62,9 +62,8 @@ llm = ChatOpenAI(model_name=llm_name, temperature=0.15, openai_api_key=OPENAI_AP
 prompt_template = """
 You are a bioinformatics teaching assistant for a pathogen genomics workshop.
 You have access to lecture notes from 12 distinct lectures.
-Using only the provided context from these lecture notes, concisely answer the student's question below in no more than four sentences.
-If the answer is not clear from the context provided, explicitly say you don't know and recommend the student ask Jody, the course instructor.
-
+Using only the provided context from these lecture notes, with linebreaks after each sentence for readability, concisely answer the student's question below in no more than four sentences. But be specific when explain code and errors.
+If the answer is not clear from the context provided, explicitly say you don't know and recommend the student to ask Jody, the course instructor.
 Context:
 {context}
 
