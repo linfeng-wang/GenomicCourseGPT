@@ -10,10 +10,15 @@ sys.path.append('../..')
 # import panel as pn  # GUI
 # pn.extension()
 # Load the .env file so OPENAI_API_KEY is in your environment
-_ = load_dotenv(find_dotenv())
-openai.api_key = os.environ.get("OPENAI_API_KEY")
+load_dotenv(find_dotenv())
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-OPENAI_API_KEY = "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"
+# Set OpenAI's global API key securely
+openai.api_key = OPENAI_API_KEY
+
+# Verify key loaded correctly (optional, recommended for debug)
+assert OPENAI_API_KEY is not None, "API key not loaded. Check your .env file."
+
 #%%
 import datetime
 current_date = datetime.datetime.now().date()

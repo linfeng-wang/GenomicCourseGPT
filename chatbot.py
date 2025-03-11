@@ -1,6 +1,8 @@
+#%%
 import os
 import sys
 import datetime
+import openai
 from dotenv import load_dotenv, find_dotenv
 from langchain.document_loaders import UnstructuredMarkdownLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -13,9 +15,11 @@ from langchain.chains import ConversationalRetrievalChain
 
 # Load environment
 load_dotenv(find_dotenv())
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+# OPENAI_API_KEY = "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"
+# openai.api_key = OPENAI_API_KEY
 
+#%%
 # LLM model selection
 # llm_name = "gpt-4-turbo"  # or "gpt-3.5-turbo"
 llm_name = "gpt-3.5-turbo"
@@ -100,3 +104,5 @@ while True:
     response = qa.invoke({"question": question})
     answer = response['answer']
     print(NEON_GREEN + f"\nAssistant: {answer}" + RESET_COLOR)
+
+# %%
