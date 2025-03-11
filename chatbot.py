@@ -96,7 +96,10 @@ NEON_GREEN = '\033[92m'
 RESET_COLOR = '\033[0m'
 
 # Chat loop in terminal
+print(CYAN + "*"*20 + RESET_COLOR)
 print(CYAN + "\nBioinformatics TA chatbot is ready! Type 'exit' to end the conversation." + RESET_COLOR)
+print(CYAN + "*"*20 + RESET_COLOR)
+
 
 while True:
     question = input("\nYou (type 'exit' to quit): ")
