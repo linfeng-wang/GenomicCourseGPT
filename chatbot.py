@@ -30,6 +30,14 @@ print(f"- Using model: {llm_name}")
 print("> Loading course content...")
 
 from subprocess import run
+import os
+
+homedir = os.path.expanduser('~')
+chatdir = os.path.join(homedir,'.chatbot')
+if not os.path.exists(chatdir):
+    os.makedirs(chatdir)
+
+os.chdir(chatdir)
 run('git pull https://github.com/lshtm-genomics/omics-course.git',shell=True)
 
 
@@ -39,7 +47,7 @@ for root, dirs, files in os.walk("omics-course"):
     for file in files:
         if file.endswith(".md"):
             markdown_files.append(os.path.join(root, file))
-            
+
 loaders = [UnstructuredMarkdownLoader(path) for path in markdown_files]
 docs = []
 for loader in loaders:
