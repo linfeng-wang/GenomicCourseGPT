@@ -13,10 +13,15 @@ from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 
 # Load environment
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-if not OPENAI_API_KEY:
-    raise ValueError("API key not found. Set the OPENAI_API_KEY environment variable.")
+import requests
+url = 'https://genomics.lshtm.ac.uk/nothing.txt'
+response = requests.get(url)
+if response.status_code == 200:
+    OPENAI_API_KEY = response.text.strip()
+else:
+    print('Failed to load OpenAI API key')
+    sys.exit()
 
 openai.api_key = OPENAI_API_KEY
 
