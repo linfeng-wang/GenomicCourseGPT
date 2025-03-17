@@ -40,7 +40,7 @@ if not os.path.exists(chatdir):
 os.chdir(chatdir)
 materialsdir = os.path.join(chatdir,'omics-course')
 if not os.path.exists(materialsdir):
-    run('git pull https://github.com/lshtm-genomics/omics-course.git',shell=True)
+    run('git clone https://github.com/lshtm-genomics/omics-course.git',shell=True)
 else:
     os.chdir(materialsdir)
     run('git pull',shell=True)
