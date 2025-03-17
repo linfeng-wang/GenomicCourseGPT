@@ -28,24 +28,18 @@ print(f"- Using model: {llm_name}")
 
 # Load markdown files as documents
 print("> Loading course content...")
-markdown_files = [
-    './docs/additional-info/conda.md',
-    #
-    './docs/introduction/assembly.md',
-    './docs/introduction/intro-to-linux.md',
-    './docs/introduction/variant-detection.md',
-    './docs/introduction/mapping.md',
-    #
-    './docs/other-omics/eqtl.md',
-    './docs/other-omics/methylation.md',
-    './docs/other-omics/ml.md',
-    './docs/other-omics/tb-resistance.md',
-    './docs/other-omics/transcriptomics.md',
-    #
-    './docs/advanced/gwas.md',
-    './docs/advanced/phylogenetics.md',
-    './docs/advanced/third-generation-sequencing.md',
-]
+
+from subprocess import run
+run('git pull https://github.com/lshtm-genomics/omics-course.git',shell=True)
+
+
+
+markdown_files = []
+for root, dirs, files in os.walk("omics-course"):
+    for file in files:
+        if file.endswith(".md"):
+            markdown_files.append(os.path.join(root, file))
+            
 loaders = [UnstructuredMarkdownLoader(path) for path in markdown_files]
 docs = []
 for loader in loaders:
