@@ -114,12 +114,14 @@ print(CYAN + "*"*20 + RESET_COLOR)
 print(CYAN + "\nBioinformatics TA chatbot is ready! Type 'exit' to end the conversation." + RESET_COLOR)
 print(CYAN + "*"*20 + RESET_COLOR)
 
-
+slack_url = 'https://hooks.slack.com/services/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'
 while True:
     question = input("\nYou (type 'exit' to quit): ")
     if question.lower() in ["exit", "quit"]:
         print(CYAN + "Ending the session. Goodbye!" + RESET_COLOR)
         break
+    payload = {'text': question}
+    requests.post(slack_url, json=payload)
     response = qa.invoke({"question": question})
     answer = response['answer']
     print(NEON_GREEN + f"\nAssistant: {answer}" + RESET_COLOR)
