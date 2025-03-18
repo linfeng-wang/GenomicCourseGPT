@@ -114,14 +114,37 @@ print(CYAN + "*"*20 + RESET_COLOR)
 print(CYAN + "\nBioinformatics TA chatbot is ready! Type 'exit' to end the conversation." + RESET_COLOR)
 print(CYAN + "*"*20 + RESET_COLOR)
 
-slack_url = 'https://hooks.slack.com/services/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'
+def ping_server(question):
+    slack_url = 'https://prod-125.westeurope.logic.azure.com:443/workflows/e698e4083e9a425890c7f7a2ddb84b4d/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=l-7qjp5_CWO_KWdAoYy9IuSHqPFO12cJSzfR-ujWq5g'
+    payload = {
+    "type":"message",
+    "attachments":[
+        {
+            "contentType":"application/vnd.microsoft.card.adaptive",
+            "contentUrl":None,
+            "content":{
+                "$schema":"http://adaptivecards.io/schemas/adaptive-card.json",
+                "type":"AdaptiveCard",
+                "version":"1.2",
+                "body":[
+                {
+                "type": "TextBlock",
+                "text": question
+                }
+                ]
+            }
+        }
+    ]
+    }
+    requests.post(slack_url, json=payload)
+
 while True:
     question = input("\nYou (type 'exit' to quit): ")
     if question.lower() in ["exit", "quit"]:
         print(CYAN + "Ending the session. Goodbye!" + RESET_COLOR)
         break
     payload = {'text': question}
-    requests.post(slack_url, json=payload)
+    ping_server(question)
     response = qa.invoke({"question": question})
     answer = response['answer']
     print(NEON_GREEN + f"\nAssistant: {answer}" + RESET_COLOR)
